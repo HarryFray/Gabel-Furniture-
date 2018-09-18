@@ -1,16 +1,34 @@
 import React, { Component } from 'react';
 import './App.css';
 
+import styled from 'styled-components';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
+import Nav from './Nav';
+import Home from './Home';
+import Cart from './Cart';
+import ItemDetail from './ItemDetail';
+
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Welcome to Gabel Furniture</h1>
-        </header>
-      </div>
+      <Router>
+        <div className="App">
+          <Nav />
+          <Content>
+            <Route path="/home" component={Home} />
+            <Route path="/cart" component={Cart} />
+            <Route path="/detail" component={ItemDetail} />
+          </Content>
+        </div>
+      </Router>
     );
   }
 }
 
 export default App;
+
+const Content = styled.div`
+  padding-top: 50px;
+  width: 100%;
+`;

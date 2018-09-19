@@ -45,7 +45,6 @@ class ItemDetail extends Component {
   }
 
   render() {
-    console.log(this.props.items);
     return (
       <Wrapper className="ItemDetail">
         <Item

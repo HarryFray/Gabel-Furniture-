@@ -51,6 +51,9 @@ class Cart extends Component {
   render() {
     return (
       <Wrapper className="Cart">
+        {this.state.itemsInCartAndUserSpecificInfo.length === 0 && (
+          <h1>You Have No Items In Your Cart</h1>
+        )}
         <ItemList>
           {this.state.itemsInCartAndUserSpecificInfo.map(item => {
             return (
@@ -74,11 +77,12 @@ export default connect(state => ({
 }))(Cart);
 
 const Wrapper = styled.div`
+  padding: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
   width: 100vw;
+  height: 100vh;
 
   h1 {
     margin: 0px;
@@ -103,4 +107,5 @@ const ExtraCartInfo = styled.div`
 const CartWrapper = styled.div`
   display: flex;
   height: 600px;
+  padding-bottom: 40px;
 `;

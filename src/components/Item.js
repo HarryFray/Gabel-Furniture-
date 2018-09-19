@@ -10,7 +10,8 @@ class Item extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isDetailView: false
+      isDetailView: false,
+      isInCartView: false
     };
   }
 
@@ -18,14 +19,19 @@ class Item extends Component {
     if (this.props.isDetailView) {
       this.setState({ isDetailView: true });
     }
+    if (this.props.isCartView) {
+      this.setState({ isInCartView: true });
+    }
   }
 
   handleAddToCart(id) {
-    this.props.dispatch(addItemToCart(id));
+    this.props.dispatch(addItemToCart({ id, qty: 0, specialReq: '' }));
+    this.setState({ isInCartView: true });
   }
 
   handleRemoveFromCart(id) {
     this.props.dispatch(removeItemFromCart(id));
+    this.setState({ isInCartView: false });
   }
 
   render() {
@@ -47,10 +53,13 @@ class Item extends Component {
         <p> {description} </p>
         <h2>{type}</h2>
         <h3>{price}</h3>
-        <button onClick={() => this.handleAddToCart(key)}>Add To Cart</button>
-        <button onClick={() => this.handleRemoveFromCart(key)}>
-          Remove From Cart
-        </button>
+        {this.state.isInCartView ? (
+          <button onClick={() => this.handleRemoveFromCart(key)}>
+            Remove From Cart
+          </button>
+        ) : (
+          <button onClick={() => this.handleAddToCart(key)}>Add To Cart</button>
+        )}
       </Wrapper>
     );
   }
@@ -65,7 +74,7 @@ const Wrapper = styled.div`
   width: 400px;
   background-color: grey;
   color: white;
-  margin: 50px;
+  margin: 50px 0px 50px 50px;
 
   p {
     padding: 10px;

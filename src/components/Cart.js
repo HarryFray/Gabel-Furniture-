@@ -11,7 +11,7 @@ class Cart extends Component {
   constructor() {
     super();
     this.state = {
-      itemsInCart: []
+      itemsInCartAndUserSpecificInfo: []
     };
   }
 
@@ -21,20 +21,28 @@ class Cart extends Component {
       map(items.val(), (itemData, key) => {
         allItems.push({ key, itemData });
       });
+      let IdsInCart = this.props.items.map(item => item.id);
+
       let itemsInCart = allItems.filter(item => {
-        return this.props.items.includes(item.key);
+        return IdsInCart.includes(item.key);
       });
-      this.setState({
-        itemsInCart
+
+      let itemsInCartAndUserSpecificInfo = itemsInCart.map(item => {
+        let userSpecificInfo = this.props.items.filter(userItemInfo => {
+          return userItemInfo.id === item.key;
+        });
+        return { ...item, ...userSpecificInfo[0] };
       });
+      this.setState({ itemsInCartAndUserSpecificInfo });
     });
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props !== prevProps) {
+      let IdsInCart = this.props.items.map(item => item.id);
       this.setState({
         itemsInCart: prevState.itemsInCart.filter(item => {
-          return this.props.items.includes(item.key);
+          return IdsInCart.includes(item.key);
         })
       });
     }
@@ -44,8 +52,16 @@ class Cart extends Component {
     return (
       <Wrapper className="Cart">
         <ItemList>
-          {this.state.itemsInCart.map(item => {
-            return <Item key={item.key} itemData={item} />;
+          {this.state.itemsInCartAndUserSpecificInfo.map(item => {
+            return (
+              <CartWrapper key={item.key}>
+                <Item isCartView={true} itemData={item} />
+                <ExtraCartInfo>
+                  <h3>{`QTY:${item.qty}`}</h3>
+                  <h3>{`Special Request:${item.specialReq}`}</h3>
+                </ExtraCartInfo>
+              </CartWrapper>
+            );
           })}
         </ItemList>
       </Wrapper>
@@ -75,4 +91,16 @@ const ItemList = styled.div`
 
   width: 1500px;
   display: flex;
+`;
+
+const ExtraCartInfo = styled.div`
+  background-color: orange;
+  width: 300px;
+  margin-top: 50px;
+  height: 600px;
+`;
+
+const CartWrapper = styled.div`
+  display: flex;
+  height: 600px;
 `;

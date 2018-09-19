@@ -31,7 +31,6 @@ class Item extends Component {
   render() {
     const { title, description, price, type } = this.props.itemData.itemData;
     const { key } = this.props.itemData;
-    console.log(this.props.items);
     return (
       <Wrapper>
         <Pic>Cool picture from FB</Pic>

@@ -19,7 +19,7 @@ class App extends Component {
           <Content>
             <Route exact path="/" component={Home} />
             <Route path="/cart" component={Cart} />
-            <Route path="/detail" component={ItemDetail} />
+            <Route path="/item/:id" component={ItemDetail} />
             <Route path="/admin" component={Admin} />
           </Content>
         </div>

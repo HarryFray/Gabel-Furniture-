@@ -22,26 +22,11 @@ class Home extends Component {
       map(items.val(), (itemData, key) => {
         allItems.push({ key, itemData });
       });
-      this.setState(
-        {
-          items: allItems
-        },
-        () => {
-          console.log(this.state.items);
-        }
-      );
+      this.setState({
+        items: allItems
+      });
     });
   }
-
-  imemAData = {
-    title: 'Cool Table',
-    description: 'This table is great trust me!'
-  };
-
-  imemBData = {
-    title: 'coffee higaboooo!',
-    description: 'mwahh raa goo!'
-  };
 
   render() {
     return (

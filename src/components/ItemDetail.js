@@ -5,15 +5,14 @@ import styled from 'styled-components';
 import Item from './Item';
 
 class ItemDetail extends Component {
-  imemAData = {
-    title: 'fuck',
-    description: 'This table is great trust me!'
-  };
-
   render() {
+    console.log('FROM ITEM DETAIL', this.props);
     return (
       <Wrapper className="ItemDetail">
-        <Item itemData={this.imemAData} />
+        <Item
+          itemData={this.props.location.state.itemData}
+          isDetailView={true}
+        />
       </Wrapper>
     );
   }

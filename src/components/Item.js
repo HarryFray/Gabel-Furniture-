@@ -5,12 +5,38 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isDetailView: false
+    };
+  }
+
+  componentDidMount() {
+    if (this.props.isDetailView) {
+      this.setState({ isDetailView: true });
+    }
+  }
+
   render() {
-    const { title, description, price, type } = this.props.itemData.itemData;
+    const {
+      title,
+      description,
+      price,
+      type,
+      isDetailView
+    } = this.props.itemData.itemData;
     return (
       <Wrapper>
         <Pic>Cool picture from FB</Pic>
-        <Link to="/detail">
+        <Link
+          to={{
+            pathname: `item/${title}`,
+            state: {
+              itemData: this.props.itemData
+            }
+          }}
+        >
           <h3>{title}</h3>
         </Link>
         <p> {description} </p>

@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 class Home extends Component {
   render() {
-    const { title, description } = this.props.itemData;
+    const { title, description, price, type } = this.props.itemData.itemData;
     return (
       <Wrapper>
         <Pic>Cool picture from FB</Pic>
@@ -14,6 +14,8 @@ class Home extends Component {
           <h3>{title}</h3>
         </Link>
         <p> {description} </p>
+        <h2>{type}</h2>
+        <h3>{price}</h3>
       </Wrapper>
     );
   }

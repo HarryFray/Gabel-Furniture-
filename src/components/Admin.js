@@ -16,7 +16,7 @@ class Admin extends Component {
   }
 
   handleAddNewItemToStore() {
-    database.ref('/itmes').push(this.state);
+    database.ref('/items').push(this.state);
   }
 
   handleTitleInput(e) {

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import map from 'lodash/map';
+
 import './App.css';
 
 import Item from './Item';
@@ -7,7 +9,29 @@ import styled from 'styled-components';
 import { database } from '../utils/firebase';
 
 class Home extends Component {
-  componentDidMount() {}
+  constructor() {
+    super();
+    this.state = {
+      items: []
+    };
+  }
+
+  componentDidMount() {
+    database.ref('/items').on('value', items => {
+      let allItems = [];
+      map(items.val(), (itemData, key) => {
+        allItems.push({ key, itemData });
+      });
+      this.setState(
+        {
+          items: allItems
+        },
+        () => {
+          console.log(this.state.items);
+        }
+      );
+    });
+  }
 
   imemAData = {
     title: 'Cool Table',
@@ -23,12 +47,9 @@ class Home extends Component {
     return (
       <Wrapper className="Home">
         <ItemList>
-          <Item itemData={this.imemAData} />
-          <Item itemData={this.imemBData} />
-          <Item itemData={this.imemAData} />
-          <Item itemData={this.imemAData} />
-          <Item itemData={this.imemAData} />
-          <Item itemData={this.imemAData} />
+          {this.state.items.map(item => {
+            return <Item key={item.key} itemData={item} />;
+          })}
         </ItemList>
       </Wrapper>
     );
@@ -43,7 +64,6 @@ const Wrapper = styled.div`
   justify-content: center;
   height: 100vh;
   width: 100vw;
-  color: white;
 
   h1 {
     margin: 0px;

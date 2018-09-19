@@ -8,7 +8,7 @@ class Nav extends Component {
   render() {
     return (
       <Wrapper className="Nav">
-        <Link to="/home">
+        <Link to="/">
           <h1>Home</h1>
         </Link>
         <Link to="/cart">

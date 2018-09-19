@@ -4,8 +4,11 @@ import './App.css';
 import Item from './Item';
 
 import styled from 'styled-components';
+import { database } from '../utils/firebase';
 
 class Home extends Component {
+  componentDidMount() {}
+
   imemAData = {
     title: 'Cool Table',
     description: 'This table is great trust me!'

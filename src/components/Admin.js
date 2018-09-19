@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 
 import styled from 'styled-components';
-import { database } from '../utils/firebase';
+import { database, storage } from '../utils/firebase';
 
 class Admin extends Component {
   constructor() {
@@ -13,6 +13,8 @@ class Admin extends Component {
       type: '',
       price: ''
     };
+
+    this.storageRef = storage.ref('/item-images');
   }
 
   handleAddNewItemToStore() {
@@ -33,6 +35,11 @@ class Admin extends Component {
 
   handleTypeInput(e) {
     this.setState({ type: e.target.value });
+  }
+
+  handleFileInput(e) {
+    let file = e.target.files[0];
+    let uploadTask = this.storageRef.child(this.state.title).put(file);
   }
 
   render() {
@@ -84,6 +91,9 @@ class Admin extends Component {
             Type:
             {this.state.type}
           </h3>
+        </InputDetail>
+        <InputDetail>
+          <input type="file" onChange={e => this.handleFileInput(e)} />
         </InputDetail>
       </Wrapper>
     );

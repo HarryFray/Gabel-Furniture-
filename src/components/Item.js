@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import { storage } from '../utils/firebase';
 
 import { Link } from 'react-router-dom';
 import { addItemToCart, removeItemFromCart } from '../actions/items';
@@ -11,7 +12,8 @@ class Item extends Component {
     super(props);
     this.state = {
       isDetailView: false,
-      isInCartView: false
+      isInCartView: false,
+      url: ''
     };
   }
 
@@ -22,6 +24,13 @@ class Item extends Component {
     if (this.props.isCartView) {
       this.setState({ isInCartView: true });
     }
+
+    storage
+      .ref(`/item-images/${this.props.itemData.itemData.title}`)
+      .getDownloadURL()
+      .then(url => {
+        this.setState({ url });
+      });
   }
 
   handleAddToCart(id) {
@@ -39,7 +48,9 @@ class Item extends Component {
     const { key } = this.props.itemData;
     return (
       <Wrapper>
-        <Pic>Cool picture from FB</Pic>
+        <Pic>
+          <img src={this.state.url} />
+        </Pic>
         <Link
           to={{
             pathname: `item/${title}`,
@@ -88,4 +99,8 @@ const Pic = styled.div`
   height: 300px;
   width: 100%;
   background-color: green;
+  img {
+    width: 100%;
+    heigth: 300px;
+  }
 `;

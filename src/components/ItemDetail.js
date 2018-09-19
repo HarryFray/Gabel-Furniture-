@@ -6,7 +6,7 @@ import Item from './Item';
 
 class ItemDetail extends Component {
   imemAData = {
-    title: 'Cool Table',
+    title: 'fuck',
     description: 'This table is great trust me!'
   };
 

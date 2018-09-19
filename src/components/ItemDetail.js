@@ -6,7 +6,6 @@ import Item from './Item';
 
 class ItemDetail extends Component {
   render() {
-    console.log('FROM ITEM DETAIL', this.props);
     return (
       <Wrapper className="ItemDetail">
         <Item

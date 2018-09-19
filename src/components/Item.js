@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 
 import { Link } from 'react-router-dom';
+import { addItemToCart, removeItemFromCart } from '../actions/items';
 
-class Home extends Component {
+class Item extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,14 +20,18 @@ class Home extends Component {
     }
   }
 
+  handleAddToCart(id) {
+    this.props.dispatch(addItemToCart(id));
+  }
+
+  handleRemoveFromCart(id) {
+    this.props.dispatch(removeItemFromCart(id));
+  }
+
   render() {
-    const {
-      title,
-      description,
-      price,
-      type,
-      isDetailView
-    } = this.props.itemData.itemData;
+    const { title, description, price, type } = this.props.itemData.itemData;
+    const { key } = this.props.itemData;
+    console.log(this.props.items);
     return (
       <Wrapper>
         <Pic>Cool picture from FB</Pic>
@@ -42,12 +48,18 @@ class Home extends Component {
         <p> {description} </p>
         <h2>{type}</h2>
         <h3>{price}</h3>
+        <button onClick={() => this.handleAddToCart(key)}>Add To Cart</button>
+        <button onClick={() => this.handleRemoveFromCart(key)}>
+          Remove From Cart
+        </button>
       </Wrapper>
     );
   }
 }
 
-export default Home;
+export default connect(state => ({
+  items: state.items
+}))(Item);
 
 const Wrapper = styled.div`
   height: 600px;

@@ -53,13 +53,16 @@ class Item extends Component {
         <p> {description} </p>
         <h2>{type}</h2>
         <h3>{price}</h3>
-        {this.state.isInCartView ? (
-          <button onClick={() => this.handleRemoveFromCart(key)}>
-            Remove From Cart
-          </button>
-        ) : (
-          <button onClick={() => this.handleAddToCart(key)}>Add To Cart</button>
-        )}
+        {!this.props.isHomeView &&
+          (this.state.isInCartView ? (
+            <button onClick={() => this.handleRemoveFromCart(key)}>
+              Remove From Cart
+            </button>
+          ) : (
+            <button onClick={() => this.handleAddToCart(key)}>
+              Add To Cart
+            </button>
+          ))}
       </Wrapper>
     );
   }

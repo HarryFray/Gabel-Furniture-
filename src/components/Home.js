@@ -33,7 +33,7 @@ class Home extends Component {
       <Wrapper className="Home">
         <ItemList>
           {this.state.items.map(item => {
-            return <Item key={item.key} itemData={item} />;
+            return <Item key={item.key} itemData={item} isHomeView={true} />;
           })}
         </ItemList>
       </Wrapper>

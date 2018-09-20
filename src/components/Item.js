@@ -3,7 +3,6 @@ import './App.css';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { storage } from '../utils/firebase';
-
 import { Link } from 'react-router-dom';
 import { addItemToCart, removeItemFromCart } from '../actions/items';
 
@@ -17,6 +16,7 @@ class Item extends Component {
   }
 
   componentDidMount() {
+    // cheking if item is in cart
     let IdsInCart = this.props.items.map(item => item.id);
     if (IdsInCart.includes(this.props.itemData.key)) {
       this.setState({ isInCart: true });

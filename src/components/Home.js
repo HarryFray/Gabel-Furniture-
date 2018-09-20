@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import map from 'lodash/map';
-
 import './App.css';
-
 import Item from './Item';
-
 import styled from 'styled-components';
 import { database } from '../utils/firebase';
 
@@ -17,6 +14,7 @@ class Home extends Component {
   }
 
   componentDidMount() {
+    // listening for new items added
     database.ref('/items').on('value', items => {
       let allItems = [];
       map(items.val(), (itemData, key) => {

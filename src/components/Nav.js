@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -13,6 +12,7 @@ class Nav extends Component {
     };
   }
 
+  // updating number of items in cart
   componentDidUpdate(prevProps, prevState) {
     if (this.props !== prevProps) {
       let totalItemsInCart = this.props.items.length;

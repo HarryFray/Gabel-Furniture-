@@ -17,17 +17,20 @@ class Cart extends Component {
   }
 
   componentDidMount() {
+    // listening for item changes
     database.ref('/items').on('value', items => {
       let allItems = [];
       map(items.val(), (itemData, key) => {
         allItems.push({ key, itemData });
       });
-      let IdsInCart = this.props.items.map(item => item.id);
 
+      // getting all items in cart
+      let IdsInCart = this.props.items.map(item => item.id);
       let itemsInCart = allItems.filter(item => {
         return IdsInCart.includes(item.key);
       });
 
+      // merging fb data with redux data
       let itemsInCartAndUserSpecificInfo = itemsInCart.map(item => {
         let userSpecificInfo = this.props.items.filter(userItemInfo => {
           return userItemInfo.id === item.key;
@@ -40,6 +43,7 @@ class Cart extends Component {
     });
   }
 
+  // updating cart when item is deleted
   componentDidUpdate(prevProps, prevState) {
     if (this.props !== prevProps) {
       let IdsInCart = this.props.items.map(item => item.id);
@@ -67,7 +71,6 @@ class Cart extends Component {
   }
 
   render() {
-    console.log(this.state.itemsInCartAndUserSpecificInfo);
     return (
       <Wrapper className="Cart">
         {this.state.itemsInCartAndUserSpecificInfo.length === 0 && (
@@ -193,6 +196,6 @@ const CartWrapper = styled.div`
 
   height: 600px;
   padding-bottom: 40px;
-  width: 700px;
+  width: 600px;
   margin-left: 200px;
 `;

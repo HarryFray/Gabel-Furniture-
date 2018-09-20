@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { updateSpecialReq, updateQty, updateColor } from '../actions/items';
-
 import Item from './Item';
 
 class ItemDetail extends Component {
@@ -19,6 +17,7 @@ class ItemDetail extends Component {
   }
 
   componentDidMount() {
+    //checking if item is in cart
     let itemIds = this.props.items.map(item => item.id);
     if (itemIds.includes(this.props.location.state.itemData.key)) {
       this.setState({ isInCart: true });

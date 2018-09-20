@@ -15,6 +15,7 @@ class ChatRoom extends Component {
   }
 
   componentDidMount() {
+    // listeing for chat room changes
     database.ref('/chatroom').on('value', snapshot => {
       let chatLog = [];
       map(snapshot.val(), (sentence, key) => {

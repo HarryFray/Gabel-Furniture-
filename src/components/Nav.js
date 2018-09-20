@@ -11,6 +11,7 @@ class Nav extends Component {
         <Link to="/">
           <h1>Home</h1>
         </Link>
+        <h1>Gabel Furniture</h1>
         <Link to="/cart">
           <h1>Cart</h1>
         </Link>

@@ -127,9 +127,16 @@ const Detail = styled.div`
   width: 400px;
   background-color: grey;
   color: white;
-  margin: 50px;
   display: flex;
   flex-direction: column;
+  background-color: lightgrey;
+
+  margin: 10px;
+
+  margin: 40px auto;
+  -webkit-box-shadow: 0 10px 6px -6px #777;
+  -moz-box-shadow: 0 10px 6px -6px #777;
+  box-shadow: 0 10px 6px -6px #777;
 `;
 
 const InputDetail = styled.div`

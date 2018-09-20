@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import map from 'lodash/map';
 import { database } from '../utils/firebase';
 import Item from './Item';
-
 import styled from 'styled-components';
+import ChatRoom from './ChatRoom';
 
 class Cart extends Component {
   constructor() {
@@ -68,6 +68,7 @@ class Cart extends Component {
             );
           })}
         </ItemList>
+        <ChatRoom />
       </Wrapper>
     );
   }
@@ -83,7 +84,7 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
 
   h1 {
     margin: 0px;

@@ -56,29 +56,33 @@ class Item extends Component {
         <Pic>
           <img src={this.state.url} />
         </Pic>
-        <Link
-          to={{
-            pathname: `item/${title}`,
-            state: {
-              itemData: this.props.itemData
-            }
-          }}
-        >
-          <h3>{title}</h3>
-        </Link>
-        <p> {description} </p>
-        <h2>{type}</h2>
-        <h3>{price}</h3>
-        {!this.props.isHomeView &&
-          (this.state.isInCart ? (
-            <button onClick={() => this.handleRemoveFromCart(key)}>
-              Remove From Cart
-            </button>
-          ) : (
-            <button onClick={() => this.handleAddToCart(key)}>
-              Add To Cart
-            </button>
-          ))}
+        <Content>
+          <Link
+            to={{
+              pathname: `item/${title}`,
+              state: {
+                itemData: this.props.itemData
+              }
+            }}
+          >
+            <h3>{title}</h3>
+          </Link>
+          <p> {description} </p>
+          <div>
+            <h3>Type: {type}</h3>
+            <h3>Price: ${price}</h3>
+          </div>
+          {!this.props.isHomeView &&
+            (this.state.isInCart ? (
+              <button onClick={() => this.handleRemoveFromCart(key)}>
+                Remove From Cart
+              </button>
+            ) : (
+              <button onClick={() => this.handleAddToCart(key)}>
+                Add To Cart
+              </button>
+            ))}
+        </Content>
       </Wrapper>
     );
   }
@@ -91,9 +95,14 @@ export default connect(state => ({
 const Wrapper = styled.div`
   height: 600px;
   width: 400px;
-  background-color: grey;
-  color: white;
-  margin: 50px 0px 50px 50px;
+  background-color: lightgrey;
+
+  margin: 10px;
+
+  margin: 40px auto;
+  -webkit-box-shadow: 0 10px 6px -6px #777;
+  -moz-box-shadow: 0 10px 6px -6px #777;
+  box-shadow: 0 10px 6px -6px #777;
 
   p {
     padding: 10px;
@@ -103,9 +112,35 @@ const Wrapper = styled.div`
 const Pic = styled.div`
   height: 300px;
   width: 100%;
-  background-color: green;
+  background-color: lightgrey;
   img {
     width: 100%;
     heigth: 300px;
+  }
+`;
+
+const Content = styled.div`
+  padding-top: 75px;
+  height: 300px;
+  width: 100%;
+
+  p {
+    margin: 0px;
+  }
+
+  a {
+    h3 {
+      padding-top: 30px;
+      margin: 0px;
+    }
+  }
+
+  div {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+    h3 {
+      margin: 0px;
+    }
   }
 `;

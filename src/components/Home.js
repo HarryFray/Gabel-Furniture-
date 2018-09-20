@@ -49,6 +49,7 @@ const Wrapper = styled.div`
   justify-content: center;
   height: 100vh;
   width: 100vw;
+  padding-top: 350px;
 
   h1 {
     margin: 0px;

@@ -59,6 +59,7 @@ class ItemDetail extends Component {
     this.props.dispatch(updateColor(key, this.state.color));
     this.props.dispatch(updateSpecialReq(key, this.state.specialReq));
     this.props.dispatch(updateQty(key, this.state.qty));
+    this.props.history.push('/cart');
   }
 
   render() {
@@ -109,9 +110,11 @@ class ItemDetail extends Component {
               ref={input => (this.input = input)}
               onKeyPress={this.handleUpdateSpecialReqInLocalState.bind(this)}
             />
-            <SpecialReqButton onClick={this.handleUpdatSpecialReq.bind(this)}>
-              Make Special Request
-            </SpecialReqButton>
+            {this.state.isInCart && (
+              <SpecialReqButton onClick={this.handleUpdatSpecialReq.bind(this)}>
+                Update Special Request
+              </SpecialReqButton>
+            )}
           </div>
         </Detail>
       </Wrapper>

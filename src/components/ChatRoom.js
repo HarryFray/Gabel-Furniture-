@@ -43,7 +43,7 @@ class ChatRoom extends Component {
   render() {
     return (
       <Wrapper>
-        {this.state.name && <div>{this.state.name} is signed in</div>}
+        {this.state.name && <div>{this.state.name} is signed into the</div>}
         <h1>Chat Room</h1>
         {this.state.chatLog.map(sentence => {
           return <div key={sentence}>{sentence}</div>;

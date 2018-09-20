@@ -41,9 +41,11 @@ class Cart extends Component {
     if (this.props !== prevProps) {
       let IdsInCart = this.props.items.map(item => item.id);
       this.setState({
-        itemsInCartAndUserSpecificInfo: prevProps.items.filter(item => {
-          return IdsInCart.includes(item.key);
-        })
+        itemsInCartAndUserSpecificInfo: prevState.itemsInCartAndUserSpecificInfo.filter(
+          item => {
+            return IdsInCart.includes(item.key);
+          }
+        )
       });
     }
   }

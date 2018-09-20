@@ -11,20 +11,17 @@ class Item extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isDetailView: false,
-      isInCartView: false,
+      isInCart: false,
       url: ''
     };
   }
 
   componentDidMount() {
-    if (this.props.isDetailView) {
-      this.setState({ isDetailView: true });
+    let IdsInCart = this.props.items.map(item => item.id);
+    if (IdsInCart.includes(this.props.itemData.key)) {
+      this.setState({ isInCart: true });
     }
-    if (this.props.isCartView) {
-      this.setState({ isInCartView: true });
-    }
-
+    //gettting img from fb
     storage
       .ref(`/item-images/${this.props.itemData.itemData.title}`)
       .getDownloadURL()
@@ -34,13 +31,21 @@ class Item extends Component {
   }
 
   handleAddToCart(id) {
-    this.props.dispatch(addItemToCart({ id, qty: 0, specialReq: '' }));
-    this.setState({ isInCartView: true });
+    this.props.dispatch(
+      addItemToCart({
+        id,
+        qty: 1,
+        specialReq: 'No Special Request Entered',
+        color: 'Standard Brown'
+      })
+    );
+    this.setState({ isInCart: true });
+    this.props.handleAddItemWithDetailData();
   }
 
   handleRemoveFromCart(id) {
     this.props.dispatch(removeItemFromCart(id));
-    this.setState({ isInCartView: false });
+    this.setState({ isInCart: false });
   }
 
   render() {
@@ -65,7 +70,7 @@ class Item extends Component {
         <h2>{type}</h2>
         <h3>{price}</h3>
         {!this.props.isHomeView &&
-          (this.state.isInCartView ? (
+          (this.state.isInCart ? (
             <button onClick={() => this.handleRemoveFromCart(key)}>
               Remove From Cart
             </button>

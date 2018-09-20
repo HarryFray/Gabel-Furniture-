@@ -2,6 +2,7 @@ export const ADD_ITEM_TO_CART = 'ADD_ITEM_TO_CART';
 export const REMOVE_ITEM_FROM_CART = 'REMOVE_ITEM_FROM_CART';
 export const UPDATE_QTY = 'UPDATE_QTY';
 export const UPDATE_SPECIAL_REQ = 'UPDATE_SPECIAL_REQ';
+export const UPDATE_COLOR = 'UPDATE_COLOR';
 
 export function addItemToCart(itemData) {
   return {
@@ -30,5 +31,13 @@ export function updateQty(id, qty) {
     type: UPDATE_QTY,
     id,
     qty
+  };
+}
+
+export function updateColor(id, color) {
+  return {
+    type: UPDATE_COLOR,
+    id,
+    color
   };
 }

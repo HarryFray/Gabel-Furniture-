@@ -2,7 +2,8 @@ import {
   ADD_ITEM_TO_CART,
   REMOVE_ITEM_FROM_CART,
   UPDATE_QTY,
-  UPDATE_SPECIAL_REQ
+  UPDATE_SPECIAL_REQ,
+  UPDATE_COLOR
 } from '../actions/items';
 
 export default function words(state = [], action) {
@@ -20,6 +21,10 @@ export default function words(state = [], action) {
         return item.id === action.id
           ? { ...item, specialReq: action.specialReq }
           : item;
+      });
+    case UPDATE_COLOR:
+      return state.map(item => {
+        return item.id === action.id ? { ...item, color: action.color } : item;
       });
     default:
       return state;

@@ -61,6 +61,7 @@ class Cart extends Component {
                 <Item isCartView={true} itemData={item} />
                 <ExtraCartInfo>
                   <h3>{`QTY:${item.qty}`}</h3>
+                  <h3>{`Color:${item.color}`}</h3>
                   <h3>{`Special Request:${item.specialReq}`}</h3>
                 </ExtraCartInfo>
               </CartWrapper>

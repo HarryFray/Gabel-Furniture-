@@ -3,7 +3,7 @@ import './App.css';
 
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { updateSpecialReq, updateQty } from '../actions/items';
+import { updateSpecialReq, updateQty, updateColor } from '../actions/items';
 
 import Item from './Item';
 
@@ -12,8 +12,9 @@ class ItemDetail extends Component {
     super(props);
     this.state = {
       isInCart: false,
-      qty: 0,
-      specialReq: ''
+      qty: 1,
+      specialReq: 'No Special Request Entered',
+      color: 'Standard Brown'
     };
   }
 
@@ -41,7 +42,23 @@ class ItemDetail extends Component {
   }
 
   handleUpdateSpecialReqInLocalState(e) {
-    this.setState({ specialReq: e.target.value });
+    this.setState({
+      specialReq: e.target.value
+    });
+  }
+
+  handleColorDropDownSelect(e) {
+    let color = e.target.value;
+    this.props.dispatch(
+      updateColor(this.props.location.state.itemData.key, color)
+    );
+  }
+
+  handleAddItemWithDetailData() {
+    let key = this.props.location.state.itemData.key;
+    this.props.dispatch(updateColor(key, this.state.color));
+    this.props.dispatch(updateSpecialReq(key, this.state.specialReq));
+    this.props.dispatch(updateQty(key, this.state.qty));
   }
 
   render() {
@@ -50,6 +67,9 @@ class ItemDetail extends Component {
         <Item
           itemData={this.props.location.state.itemData}
           isDetailView={true}
+          handleAddItemWithDetailData={this.handleAddItemWithDetailData.bind(
+            this
+          )}
         />
         <Detail>
           <InputDetail>
@@ -70,6 +90,19 @@ class ItemDetail extends Component {
             <button onClick={this.handleUpdatSpecialReq.bind(this)}>
               Update Special Request
             </button>
+          </InputDetail>
+          <InputDetail>
+            <label>Color</label>
+            <select
+              value={this.state.value}
+              onChange={this.handleColorDropDownSelect.bind(this)}
+            >
+              <option value="select">Select an Option</option>
+              <option value="Tope">Tope</option>
+              <option value="Brown">Brown</option>
+              <option value="Off Grey">Off Grey</option>
+              <option value="Sandy Brown">Sandy Brown</option>
+            </select>
           </InputDetail>
         </Detail>
       </Wrapper>

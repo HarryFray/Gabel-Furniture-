@@ -13,7 +13,7 @@ class ItemDetail extends Component {
     this.state = {
       isInCart: false,
       qty: 1,
-      specialReq: 'No Special Request Entered',
+      specialReq: 'No Special Request',
       color: 'Standard Brown'
     };
   }
@@ -23,13 +23,6 @@ class ItemDetail extends Component {
     if (itemIds.includes(this.props.location.state.itemData.key)) {
       this.setState({ isInCart: true });
     }
-  }
-
-  handleNewQtyEnter(e) {
-    this.setState({ qty: e.target.value });
-    this.props.dispatch(
-      updateQty(this.props.location.state.itemData.key, this.state.qty)
-    );
   }
 
   handleUpdatSpecialReq() {
@@ -47,8 +40,15 @@ class ItemDetail extends Component {
     });
   }
 
+  handleNewQtyEnter(e) {
+    let qty = e.target.value;
+    this.setState({ qty });
+    this.props.dispatch(updateQty(this.props.location.state.itemData.key, qty));
+  }
+
   handleColorDropDownSelect(e) {
     let color = e.target.value;
+    this.setState({ color });
     this.props.dispatch(
       updateColor(this.props.location.state.itemData.key, color)
     );
@@ -72,38 +72,47 @@ class ItemDetail extends Component {
           )}
         />
         <Detail>
-          <InputDetail>
-            <input
-              type="number"
-              placeholder="Qty"
-              ref={input => (this.input = input)}
-              onClick={this.handleNewQtyEnter.bind(this)}
-            />
-          </InputDetail>
-          <InputDetail>
-            <input
+          <div>
+            <div>
+              <select
+                value={this.state.value}
+                onChange={this.handleNewQtyEnter.bind(this)}
+              >
+                <option value="select">Select a qty</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+              </select>
+            </div>
+            <div>
+              <select
+                value={this.state.value}
+                onChange={this.handleColorDropDownSelect.bind(this)}
+              >
+                <option value="select">Select a Color Option</option>
+                <option value="Tope">Tope</option>
+                <option value="Brown">Brown</option>
+                <option value="Off Grey">Off Grey</option>
+                <option value="Sandy Brown">Sandy Brown</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <InputSpecialReq
               type="text"
               placeholder="Special Request"
               ref={input => (this.input = input)}
               onKeyPress={this.handleUpdateSpecialReqInLocalState.bind(this)}
             />
-            <button onClick={this.handleUpdatSpecialReq.bind(this)}>
-              Update Special Request
-            </button>
-          </InputDetail>
-          <InputDetail>
-            <label>Color</label>
-            <select
-              value={this.state.value}
-              onChange={this.handleColorDropDownSelect.bind(this)}
-            >
-              <option value="select">Select an Option</option>
-              <option value="Tope">Tope</option>
-              <option value="Brown">Brown</option>
-              <option value="Off Grey">Off Grey</option>
-              <option value="Sandy Brown">Sandy Brown</option>
-            </select>
-          </InputDetail>
+            <SpecialReqButton onClick={this.handleUpdatSpecialReq.bind(this)}>
+              Make Special Request
+            </SpecialReqButton>
+          </div>
         </Detail>
       </Wrapper>
     );
@@ -116,35 +125,40 @@ export default connect(state => ({
 
 const Wrapper = styled.div`
   height: 100vh;
-  width: 100vw;
+  width: 1000px;
   background-color: white;
   display: flex;
   justify-content: center;
 `;
 
 const Detail = styled.div`
-  height: 600px;
-  width: 400px;
-  background-color: grey;
-  color: white;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+
+  height: 600px;
+  width: 400px;
   background-color: lightgrey;
-
-  margin: 10px;
-
   margin: 40px auto;
   -webkit-box-shadow: 0 10px 6px -6px #777;
   -moz-box-shadow: 0 10px 6px -6px #777;
   box-shadow: 0 10px 6px -6px #777;
+
+  div {
+    padding-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px;
+  }
 `;
 
-const InputDetail = styled.div`
-  width: 600px;
-  display: flex;
-  align-items: center;
+const InputSpecialReq = styled.textarea`
+  height: 400px;
+  width: 350px;
+  margin: 10px;
+`;
 
-  h3 {
-    padding: 10px;
-  }
+const SpecialReqButton = styled.button`
+  margin-left: 215px;
 `;

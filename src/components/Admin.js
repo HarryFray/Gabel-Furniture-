@@ -39,7 +39,7 @@ class Admin extends Component {
 
   handleFileInput(e) {
     let file = e.target.files[0];
-    let uploadTask = this.storageRef.child(this.state.title).put(file);
+    this.storageRef.child(this.state.title).put(file);
   }
 
   render() {

@@ -71,8 +71,16 @@ class ChatRoom extends Component {
 export default ChatRoom;
 
 const Wrapper = styled.div`
+  align-self: start;
   padding-top: 50px;
-  width: 100%;
+  width: 600px;
   height: 1000px;
   background-color: orange;
+  margin-right: 100px;
+
+  background-color: lightgrey;
+
+  -webkit-box-shadow: 0 10px 6px -6px #777;
+  -moz-box-shadow: 0 10px 6px -6px #777;
+  box-shadow: 0 10px 6px -6px #777;
 `;

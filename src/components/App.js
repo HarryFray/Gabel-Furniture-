@@ -33,4 +33,6 @@ export default App;
 const Content = styled.div`
   padding-top: 50px;
   width: 100%;
+  display: flex;
+  justify-content: center;
 `;

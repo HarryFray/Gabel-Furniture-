@@ -62,9 +62,9 @@ class Cart extends Component {
               <CartWrapper key={item.key}>
                 <Item isCartView={true} itemData={item} />
                 <ExtraCartInfo>
-                  <h3>{`QTY:${item.qty}`}</h3>
-                  <h3>{`Color:${item.color}`}</h3>
-                  <h3>{`Special Request:${item.specialReq}`}</h3>
+                  <h3>{`QTY: ${item.qty}`}</h3>
+                  <h3>{`Color: ${item.color}`}</h3>
+                  <h3>{`Special Request: ${item.specialReq}`}</h3>
                 </ExtraCartInfo>
               </CartWrapper>
             );
@@ -87,29 +87,43 @@ const Wrapper = styled.div`
   justify-content: center;
   width: 100vw;
   height: 100%;
-
   h1 {
     margin: 0px;
   }
 `;
 
 const ItemList = styled.div`
-  flex-wrap: wrap;
-  padding-top: 450px;
-
   width: 1500px;
-  display: flex;
+  display: flex
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-left: 20px;
 `;
 
 const ExtraCartInfo = styled.div`
-  background-color: orange;
   width: 300px;
   margin-top: 50px;
   height: 600px;
+
+  background-color: lightgrey;
+  margin: 40px auto;
+  -webkit-box-shadow: 0 10px 6px -6px #777;
+  -moz-box-shadow: 0 10px 6px -6px #777;
+  box-shadow: 0 10px 6px -6px #777;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  padding-left: 15px;
 `;
 
 const CartWrapper = styled.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
+
   height: 600px;
   padding-bottom: 40px;
+  width: 700px;
 `;

@@ -54,7 +54,7 @@ class Item extends Component {
     return (
       <Wrapper>
         <Pic>
-          <img src={this.state.url} />
+          <img src={this.state.url} alt="" />
         </Pic>
         <Content>
           <Link

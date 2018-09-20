@@ -45,24 +45,26 @@ class ChatRoom extends Component {
       <Wrapper>
         {this.state.name && <div>{this.state.name} is signed into the</div>}
         <h1>Chat Room</h1>
-        {this.state.chatLog.map(sentence => {
-          return <div key={sentence}>{sentence}</div>;
-        })}
-        {this.state.name === '' ? (
-          <input
-            type="text"
-            placeholder="Enter Name To chat"
-            ref={input => (this.input = input)}
-            onKeyPress={this.handleEnterName.bind(this)}
-          />
-        ) : (
-          <input
-            type="text"
-            placeholder="Say Something"
-            ref={input => (this.input = input)}
-            onKeyPress={this.handleSaySomething.bind(this)}
-          />
-        )}
+        <ChatList>
+          {this.state.chatLog.map(sentence => {
+            return <div key={sentence}>{sentence}</div>;
+          })}
+          {this.state.name === '' ? (
+            <input
+              type="text"
+              placeholder="Enter Name To chat"
+              ref={input => (this.input = input)}
+              onKeyPress={this.handleEnterName.bind(this)}
+            />
+          ) : (
+            <input
+              type="text"
+              placeholder="Say Something"
+              ref={input => (this.input = input)}
+              onKeyPress={this.handleSaySomething.bind(this)}
+            />
+          )}
+        </ChatList>
       </Wrapper>
     );
   }
@@ -72,8 +74,8 @@ export default ChatRoom;
 
 const Wrapper = styled.div`
   align-self: start;
-  padding-top: 50px;
-  width: 600px;
+  padding: 20px;
+  width: 800px;
   height: 1000px;
   background-color: orange;
   margin-right: 100px;
@@ -83,4 +85,11 @@ const Wrapper = styled.div`
   -webkit-box-shadow: 0 10px 6px -6px #777;
   -moz-box-shadow: 0 10px 6px -6px #777;
   box-shadow: 0 10px 6px -6px #777;
+`;
+
+const ChatList = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-start;
 `;

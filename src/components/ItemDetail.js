@@ -32,6 +32,7 @@ class ItemDetail extends Component {
         this.state.specialReq
       )
     );
+    this.props.history.push('/cart');
   }
 
   handleUpdateSpecialReqInLocalState(e) {
